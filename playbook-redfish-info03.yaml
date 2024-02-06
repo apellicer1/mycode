@@ -1,0 +1,6 @@
+- name: Get default system, user and firmware information
+  community.general.redfish_info:
+    category: ["Systems", "Accounts", "Update"]
+    baseuri: "{{ baseuri }}"
+    username: "{{ username }}"
+    password: "{{ password }}"

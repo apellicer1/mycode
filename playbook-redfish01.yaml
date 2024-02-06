@@ -10,17 +10,14 @@
   # vars for baseuri, username, and password have been imported from the inventory (hosts.yaml). 
 
   tasks:
+  - name: Get default system, user and firmware information
+    community.general.redfish_info:
+         category: ["Systems", "Accounts", "Update"]
+         baseuri: "{{ baseuri }}"
+         username: "{{ username }}"
+         password: "{{ password }}"
 
-        - name: Get CPU inventory
-          community.general.redfish_info:
-            category: Systems
-            command: GetCpuInventory
-            baseuri: "{{ baseuri }}"      # baseurl of OOB controller
-            username: "{{ username }}"    # un of OOB controller
-            password: "{{ password }}"    # pw of OOB controller
-          register: result
-
-        - name: Display the _info we just collected
-          debug:
-            msg: "{{ result.redfish_facts.cpu.entries }}"
+   - name: Display the _info we just collected
+     debug:
+         msg: "{{ result.redfish_facts.cpu.entries }}"
 
